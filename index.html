@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang='en' class=''>
+
+<head>
+
+  <meta charset='UTF-8'>
+  <title>CodePen Demo</title>
+
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://codepen.io/Wichian-Py/pen/abXbYwa">
+
+  <style>
+    html,body {
+  width: 100%;
+  margin: 0px;
+   overflow:hidden;
+}
+
+#choices {
+  overflow:hidden;
+  transition: all .6s;
+  background-color: orange;
+  position: absolute;
+  top: 0px;
+  width: 100%; 
+  height: 0px;
+}
+
+button {
+  width: 200px;
+  margin: 10px auto;
+  display:block;
+}
+
+#playerNew {
+  height:20px;
+  background: green;
+}
+  </style>
+
+  
+</head>
+
+<body>
+	<center>
+ <h2>Post Get เฮ็ดหยังน๊อ ?</h2>
+  <p>นายวรุณพร รัตนบุตรชัย <br>
+ วิทยาลัยอาชีวศึกษาสันติราษฎร์ในพระอุปถัมภ์ จ.กรุงเทพมหานคร </p>
+  <div id="player"></div>
+
+<div id="choices">
+  <h2>Post Get เฮ็ดหยังน๊อ ?</h2>
+  <p>นายวรุณพร รัตนบุตรชัย <br>
+ วิทยาลัยอาชีวศึกษาสันติราษฎร์ในพระอุปถัมภ์ จ.กรุงเทพมหานคร </p>
+  <button id="i6PKjFksnAE">Post Get เฮ็ดหยังน๊อ Ep1</button>
+  <button id="B5bJoyOdSm0">Post Get เฮ็ดหยังน๊อ Ep2</button>  
+  <button id="bpiQ_Mouwk8">Post Get เฮ็ดหยังน๊อ Ep3</button>
+</div>
+</center>
+<script>
+	document.addEventListener('DOMContentLoaded',onYouTubeIframeAPIReady)
+
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("player", {
+    height: "480px",
+    width: "800px",
+    videoId: "d1VN6h8m498",
+    playerVars: { 
+      rel: 0, 
+      showinfo: 0, 
+      ecver: 2 
+      },
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
+}
+
+
+function onPlayerReady(event) {
+  event.target.playVideo();
+}
+
+var done = false;
+function onPlayerStateChange(event) {
+  if (event.data == done) {
+    console.log("done done done");
+    showChoices(player);//show choices    
+  }
+}
+function stopVideo() {
+  player.stopVideo();
+}
+
+function showChoices(player) {
+  let choices = document.getElementById("choices");
+  let oldPlayer = document.getElementById("player");
+  choices.style.height = "100%"; //expand choice box
+  choices.style.padding = "20px";
+}
+
+
+let buttons = document.querySelectorAll('button')
+
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    console.log('clickity')
+    let vid = button.id;
+      player.loadVideoById(vid); //load new video from the ID of the button 
+      let choices = document.getElementById("choices");
+       choices.style.height = "0px"; //hide choice box
+       choices.style.padding = "0px";//hide choice box
+  });
+});
+
+</script>
+  
+<script src="https://www.youtube.com/iframe_api"></script>
+</body>
+
+</html>
